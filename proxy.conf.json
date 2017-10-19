@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "https://stage.oneplan.eu",
-    "secure": true,
-    "logLevel": "debug",
-    "changeOrigin": true
-  }
-}
