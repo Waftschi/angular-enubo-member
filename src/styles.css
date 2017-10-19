@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Fade transition */
+app-root div {
+    animation-duration: .5s;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+    transition: transform .9s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
