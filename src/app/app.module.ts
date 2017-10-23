@@ -11,18 +11,15 @@ import { HttpModule } from '@angular/http';
 import { CoreModule } from './core/core.module';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginModule } from './login/login.module';
+import { CustomToastOption } from './core/config';
 
-export class CustomOption extends ToastOptions {
-    animate = 'flyRight'; // you can override any options available
-    newestOnTop = false;
-    showCloseButton = true;
-}
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
     ],
     imports: [
         HttpModule,
@@ -31,11 +28,12 @@ export class CustomOption extends ToastOptions {
         HomeModule,
         AppRoutingModule,
         SharedModule,
+        LoginModule,
         CoreModule,
         BrowserAnimationsModule,
         ToastModule.forRoot()
     ],
-    providers: [{provide: ToastOptions, useClass: CustomOption}],
+    providers: [{provide: ToastOptions, useClass: CustomToastOption}],
     bootstrap: [AppComponent]
 })
 export class AppModule {

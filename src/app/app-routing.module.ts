@@ -4,7 +4,8 @@ import { UserComponent } from './user/user/user.component';
 import { HomeComponent } from './home/home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthGuard } from './shared/auth-guard.service';
-import { LoginComponent } from './user/login/login.component';
+import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
     {
