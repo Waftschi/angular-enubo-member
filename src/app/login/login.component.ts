@@ -40,16 +40,18 @@ export class LoginComponent implements OnInit {
 
     login() {
         const body = {...this.loginData, ...this.loginForm.value};
-        this.authService.login(body).then(
-            (result) => {
-                if (result === true) {
-                    this.router.navigate([this.authService.redirectUrl]);
-                } else {
+        this.authService.login$(body).subscribe(
+            (auth) => {
+                if (auth === null) {
                     this.toast.error('This is not good!', 'Oops!');
                     this.router.navigate(['/login']);
                 }
+
+                this.router.navigate([this.authService.redirectUrl]);
             }
         );
+
+
     }
 
 }

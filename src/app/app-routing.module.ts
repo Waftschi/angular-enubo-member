@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthGuard } from './shared/auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { JobComponent } from './job/job.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'job',
+        component: JobComponent
     },
     {
         path: '',

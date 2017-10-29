@@ -13,6 +13,7 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
 import { CustomToastOption } from './core/config';
+import { JobModule } from './job/job.module';
 
 
 
@@ -28,6 +29,7 @@ import { CustomToastOption } from './core/config';
         HomeModule,
         AppRoutingModule,
         SharedModule,
+        JobModule,
         LoginModule,
         CoreModule,
         BrowserAnimationsModule,

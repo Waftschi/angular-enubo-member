@@ -2,36 +2,26 @@ import { Injectable } from '@angular/core';
 import { AuthDataService } from './auth-data.service';
 import { Router } from '@angular/router';
 import './rxjs';
-
-export interface IAuth {
-    authKey: string;
-    userId: number;
-    dateCreate: string;
-    type: string;
-    clientId: number;
-    clientName: string;
-    status?: string;
-}
+import { Observable } from 'rxjs/Observable';
+import { Auth } from './model/auth';
 
 @Injectable()
 export class AuthService {
     private url = '/user';
-    private auth: IAuth = null;
+    private auth: Auth = null;
 
-    constructor(private authData: AuthDataService, private router: Router) {}
+    constructor(private authData: AuthDataService, private router: Router) {
+    }
 
-    login(body): Promise<any> {
-        return new Promise((resolve) => {
-            this.authData.loginAndGetAuth(body).subscribe(result => {
+    login$(body): Observable<any> {
+        return this.authData.loginAndGetAuth$(body)
+            .map(result => {
                 if (result.status === 'forbidden') {
-                    this.auth = null;
-                    resolve(false);
+                    return null;
                 }
-
-                this.auth = result;
-                resolve(true);
+                return this.auth = result;
             });
-        });
+
     }
 
 
@@ -39,9 +29,21 @@ export class AuthService {
         return this.auth !== null;
     }
 
+    getAuthKey() {
+        return this.auth.authKey;
+    }
+
     logout() {
         this.auth = null;
         this.router.navigate(['/login']);
+    }
+
+    /**
+     *
+     * @returns {number}
+     */
+    getUserId() {
+        return this.auth.userId;
     }
 
     set redirectUrl(url) {
