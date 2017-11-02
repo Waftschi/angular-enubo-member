@@ -1,26 +1,23 @@
-import { Injectable } from '@angular/core';
-import { ProjectService } from './project.service';
-import { LocationService } from './location.service';
-import { SkillService } from './skill.service';
-import { Observable } from 'rxjs/Observable';
-import { Job } from '../shared/model/job';
 import '../shared/rxjs';
-import { Project } from '../shared/model/project';
-import { Skill } from '../shared/model/skill';
 import { AuthService } from '../shared/auth.service';
+import { Injectable } from '@angular/core';
+import { Job } from '../shared/model/job';
+import { LocationService } from './location.service';
+import { Observable } from 'rxjs/Observable';
+import { ProjectService } from './project.service';
+import { SkillService } from './skill.service';
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class JobService {
-    skills: Skill[];
-    locations: Location[];
-    projects: Project[];
+    jobs: any;
 
     constructor(private authService: AuthService,
                 private projectsService: ProjectService,
                 private locationService: LocationService,
                 private skillService: SkillService) {
     }
-
 
     /**
      *
@@ -33,22 +30,35 @@ export class JobService {
             this.locationService.getLocations$(authKey),
             this.skillService.getSkills$(authKey),
             (projects, locations, skills) => {
-                this.projects = projects;
-                this.locations = locations;
-                this.skills = skills;
-            }
-        );
+                this.setServiceData(projects, skills, locations);
+                const jobs = projects.map(project => {
+                    return project.jobs.map(job => {
+                            return this.prepareJob(job, project, locations, skills);
+                        }
+                    );
+                });
+                this.jobs = [].concat.apply([], jobs);
 
+            }).map(_ => this.jobs);
     }
 
-    private prepareJob(job, project) {
+
+    private setServiceData(projects, skills, locations) {
+        this.projectsService.setProjects(projects);
+        this.skillService.setSkills(skills);
+        this.locationService.setLocations(locations);
+    }
+
+    private prepareJob(job, project, locations, skills): Job {
         job.startDateId = project.startDateId;
         job.locationId = project.locationId;
         job.isWorking = job.users.indexOf(this.authService.getUserId()) !== -1;
         job.isApplying = job.applyingUsers.indexOf(this.authService.getUserId()) !== -1;
         job.projectId = project.projectId;
-        // job.skill = this.skillsService.getSkill(job.skillId);
-        // job.location = this.locationsService.getLocation(job.locationId);
+
+        job.skill = skills.find(s => s.skillId === job.skillId);
+        job.location = locations.find(l => l.locationId === job.locationId);
+        return job;
     }
 
 }

@@ -8,9 +8,8 @@ import { Skill } from '../shared/model/skill';
 
 @Injectable()
 export class SkillService {
-// https://stage.oneplan.eu/api/v1/app/members/projects/auth-key/e08d2c5e3d490c6fec851c603d24e168
-    // https://stage.oneplan.eu/api/v1/app/members/locations/auth-key/e08d2c5e3d490c6fec851c603d24e168
-    //   https://stage.oneplan.eu/api/v1/app/members/skills/auth-key/e08d2c5e3d490c6fec851c603d24e168
+    private skills: Skill[];
+
     constructor(@Inject(APP_URLS) private urls: any, private http: Http) {
     }
 
@@ -20,5 +19,9 @@ export class SkillService {
             .map(response => <Project[]>response.json())
             .do(data => DataService.log('auth', data))
             .catch(error => DataService.handleError(error));
+    }
+
+    setSkills(skills) {
+        this.skills = skills;
     }
 }

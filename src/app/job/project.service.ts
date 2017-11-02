@@ -7,17 +7,23 @@ import { DataService } from '../shared/data.service';
 
 @Injectable()
 export class ProjectService {
-// https://stage.oneplan.eu/api/v1/app/members/projects/auth-key/e08d2c5e3d490c6fec851c603d24e168
-    // https://stage.oneplan.eu/api/v1/app/members/locations/auth-key/e08d2c5e3d490c6fec851c603d24e168
-    //   https://stage.oneplan.eu/api/v1/app/members/skills/auth-key/e08d2c5e3d490c6fec851c603d24e168
-    constructor(@Inject(APP_URLS) private urls: any, private http: Http) {}
-        /**
-         * @returns {Observable<Project[]>}
-         */
-        getProjects$(authKey): Observable<Project[]> {
-            return this.http.get(this.urls.projectsUrl + authKey)
-                .map(response => <Project[]>response.json())
-                .do(data => DataService.log('auth', data))
-                .catch(error => DataService.handleError(error));
+    projects: Project[];
+
+    constructor(@Inject(APP_URLS) private urls: any, private http: Http) {
+    }
+
+    /**
+     * @returns {Observable<Project[]>}
+     */
+    getProjects$(authKey): Observable<Project[]> {
+        return this.http.get(this.urls.projectsUrl + authKey)
+            .map(response => <Project[]>response.json())
+            .do(data => DataService.log('auth', data))
+            .catch(error => DataService.handleError(error));
+    }
+
+
+    setProjects(projects) {
+        this.projects = projects;
     }
 }
