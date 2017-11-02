@@ -13,11 +13,10 @@ export class AppComponent implements OnInit, OnDestroy {
     title = 'app';
     private authKeyGet: Subscription;
 
-    constructor(private activateRoute: ActivatedRoute, private authService: AuthService) {
-    }
+    constructor(private authService: AuthService, private activateRoute: ActivatedRoute) {}
 
     ngOnInit() {
-        console.dir(this.activateRoute.snapshot.params);
+        // console.dir(this.activateRoute.snapshot.params);
         this.authKeyGet = this.activateRoute.queryParams.subscribe((params: Params) => {
             this.authKey = params['authKey'];
         });

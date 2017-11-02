@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
 import { CustomToastOption } from './core/config';
 import { JobModule } from './job/job.module';
+import { RoutesService } from './core/routes.service';
 
 
 
@@ -35,7 +36,7 @@ import { JobModule } from './job/job.module';
         BrowserAnimationsModule,
         ToastModule.forRoot()
     ],
-    providers: [{provide: ToastOptions, useClass: CustomToastOption}],
+    providers: [{provide: ToastOptions, useClass: CustomToastOption}, RoutesService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
