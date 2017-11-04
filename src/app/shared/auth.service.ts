@@ -7,7 +7,7 @@ import { Auth } from './model/auth';
 
 @Injectable()
 export class AuthService {
-    private url = '/user';
+    private url = '/job';
     private auth: Auth = null;
 
     constructor(private authData: AuthDataService, private router: Router) {

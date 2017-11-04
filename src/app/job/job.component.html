@@ -1,3 +1,10 @@
 <!--{{ jobs$ | async | json }}-->
+<div class="container">
+    <h1>jobs</h1>
+    <button (click)="incCounter()">Change in List</button>
+    <div>Event: {{val}}</div>
 
-<div *ngFor="let job of jobs$ | async">{{job.skill.name}}</div>
+    <app-job-list #myjobList [jobs]="jobs$ | async" (jobEmit)="handleJobEmit($event)"
+                  [counter]="counter"></app-job-list>
+</div>
+<!--<div *ngFor="let job of jobs$ | async">{{job.skill.name}}</div>-->

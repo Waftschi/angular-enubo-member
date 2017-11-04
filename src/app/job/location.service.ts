@@ -1,7 +1,6 @@
-// import { APP_URLS } from '../core/config';
 import { DataService } from '../shared/data.service';
 import { Http } from '@angular/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { JobLocation } from '../shared/model/location';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../shared/model/project';

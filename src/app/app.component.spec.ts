@@ -2,9 +2,7 @@ import { TestBed, async, inject, ComponentFixture } from '@angular/core/testing'
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './shared/auth.service';
-import { Observable } from 'rxjs/Observable';
 import { AuthDataService } from './shared/auth-data.service';
-import { Auth } from './shared/model/auth';
 import { RoutesService } from './core/routes.service';
 import { HttpModule } from '@angular/http';
 
@@ -42,17 +40,17 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent
             ],
-            providers: [AuthService, AuthDataService, RoutesService]
+            providers: [AuthService, AuthDataService, RoutesService, {provide: AuthService, useClass: MockAuthService}]
         }).compileComponents();
 
-        TestBed.overrideComponent(
-            AppComponent,
-            {
-                set: {
-                    providers: [{provide: AuthService, useClass: MockAuthService}]
-                }
-            }
-        );
+        // TestBed.overrideComponent(
+        //     AppComponent,
+        //     {
+        //         set: {
+        //             providers: [{provide: AuthService, useClass: MockAuthService}]
+        //         }
+        //     }
+        // );
 
         fixture = TestBed.createComponent(AppComponent);
 
@@ -83,7 +81,6 @@ describe('AppComponent', () => {
 
 
     it(`should have as title 'app'`, async(() => {
-        const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
         expect(app.title).toEqual('app');
     }));

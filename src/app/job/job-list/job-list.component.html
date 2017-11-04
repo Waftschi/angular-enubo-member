@@ -1,0 +1,5 @@
+<div>JobList-Counter: {{counterIn}}</div>
+<div>JobList: {{value}}</div>
+<div class="card">
+<div *ngFor="let job of jobs"  (click)="jobEmit.emit(job)">{{job.skill.name}}</div>
+</div>

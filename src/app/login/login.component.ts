@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
@@ -10,7 +10,7 @@ import { AuthService } from '../shared/auth.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     public loginForm: FormGroup;
     public loginData: any;
 
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         });
 
         this.loginForm.patchValue({username: 'user4', password: 'pwd123'});
+        this.login();
     }
 
     login() {
@@ -52,6 +53,9 @@ export class LoginComponent implements OnInit {
         );
 
 
+    }
+
+    ngOnDestroy() {
     }
 
 }

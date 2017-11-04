@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './shared/auth.service';
+import { MyEnum } from './my-enum.enum';
 
 @Component({
     selector: 'app-root',

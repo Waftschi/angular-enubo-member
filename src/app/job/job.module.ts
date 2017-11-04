@@ -5,13 +5,17 @@ import { ProjectService } from './project.service';
 import { SkillService } from './skill.service';
 import { LocationService } from './location.service';
 import { JobService } from './job.service';
+import { RoutesService } from '../core/routes.service';
+import { JobListComponent } from './job-list/job-list.component';
+import { JobAlert, TestJobAlert } from './job-alert';
+
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
     ],
-    providers: [ProjectService, SkillService, LocationService, JobService],
-    declarations: [JobComponent]
+    providers: [ProjectService, SkillService, LocationService, JobService, JobAlert, TestJobAlert],
+    declarations: [JobComponent, JobListComponent]
 })
 export class JobModule {
 }
