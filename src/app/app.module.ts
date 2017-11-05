@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
@@ -23,6 +23,7 @@ import { RoutesService } from './core/routes.service';
         AppComponent,
         PageNotFoundComponent,
     ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
     imports: [
         HttpModule,
         BrowserModule,

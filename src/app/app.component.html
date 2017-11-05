@@ -25,10 +25,11 @@
             </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" (keyup)="changeEmit($event)" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search Emit</button>
+            <input class="form-control mr-sm-2" type="text" #searchBox placeholder="Search" (keyup)="changeSubject(searchBox.value)" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search Subject</button>
         </form>
     </div>
 </nav>
-
 <router-outlet></router-outlet>

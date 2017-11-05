@@ -36,11 +36,16 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
 
         this.loginForm.patchValue({username: 'user4', password: 'pwd123'});
+
+        // only for testing
         this.login();
     }
 
     login() {
+
+        // Login Data
         const body = {...this.loginData, ...this.loginForm.value};
+
         this.authService.login$(body).subscribe(
             (auth) => {
                 if (auth === null) {
