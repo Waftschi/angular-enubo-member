@@ -42,7 +42,7 @@ export class JobComponent implements OnInit {
 
     incCounter() {
         // this.jobList.changeJobList();
-        // this.jobAlert.doAlert();
+        this.jobAlert.doAlert();
         this.counter++;
         this.jobAlert.setMyEventSubject(this.counter);
     }

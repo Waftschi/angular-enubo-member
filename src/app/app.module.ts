@@ -15,7 +15,9 @@ import { LoginModule } from './login/login.module';
 import { CustomToastOption } from './core/config';
 import { JobModule } from './job/job.module';
 import { RoutesService } from './core/routes.service';
+import { TEST_FACTORY, testFactory } from './test-inject';
 
+// import { TEST_FACTORY, testFactory } from './test-inject';
 
 
 @NgModule({
@@ -23,7 +25,7 @@ import { RoutesService } from './core/routes.service';
         AppComponent,
         PageNotFoundComponent,
     ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     imports: [
         HttpModule,
         BrowserModule,
@@ -37,11 +39,14 @@ import { RoutesService } from './core/routes.service';
         BrowserAnimationsModule,
         ToastModule.forRoot()
     ],
-    providers: [{provide: ToastOptions, useClass: CustomToastOption}, RoutesService],
+    providers: [{provide: ToastOptions, useClass: CustomToastOption}, RoutesService, {
+        provide: TEST_FACTORY,
+        useFactory: testFactory
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor(router: Router) {
-        console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+        console.log('Routes: ', JSON.stringify(router.config, undefined, 1));
     }
 }

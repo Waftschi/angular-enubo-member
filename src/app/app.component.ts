@@ -1,33 +1,34 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './shared/auth.service';
-import { MyEnum } from './my-enum.enum';
-
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
+import { TEST_FACTORY, testFactory } from './test-inject';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    providers: [{provide: TEST_FACTORY, useFactory: testFactory}]
 })
 export class AppComponent implements OnInit, OnDestroy {
     private authKey: string;
     private authKeyGet: Subscription;
-
+    public title = 'app';
     private subject = new Subject<string>();
     protected emitter: EventEmitter<string> = new EventEmitter();
 
-    constructor(private authService: AuthService, private activateRoute: ActivatedRoute) {
+    constructor(@Inject(TEST_FACTORY) private test: any,
+                private authService: AuthService,
+                private activateRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
         console.dir(this.emitter);
-
         this.subject.distinctUntilChanged().debounceTime(1000).subscribe(console.log);
+        this.test.logger('Hallo wie geht es');
 
         this.emitter
             .map((v) => v)
@@ -36,13 +37,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
         // // console.dir(this.activateRoute.snapshot.params);
-
+        // console.log('Beeing Home');
 
         this.authKeyGet = this.activateRoute.queryParams.subscribe((params: Params) => {
             this.authKey = params['authKey'];
         });
     }
-
 
     ngOnDestroy() {
         this.authKeyGet.unsubscribe();
