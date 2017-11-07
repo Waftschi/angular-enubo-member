@@ -49,6 +49,7 @@ export class JobService {
         this.locationService.setLocations(locations);
     }
 
+
     private prepareJob(job, project, locations, skills): Job {
         job.startDateId = project.startDateId;
         job.locationId = project.locationId;

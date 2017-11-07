@@ -29,6 +29,7 @@ export class JobComponent implements OnInit {
     ngOnInit() {
         this.jobs$ = this.jobService.getJobs$(this.authKey);
 
+        // Creates new Test Event Subject
         this.jobAlert.getMyEventSubject().subscribe(
             val => {
                 this.val = val;

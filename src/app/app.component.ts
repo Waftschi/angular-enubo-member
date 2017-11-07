@@ -16,9 +16,11 @@ import { TEST_FACTORY, testFactory } from './test-inject';
 export class AppComponent implements OnInit, OnDestroy {
     private authKey: string;
     private authKeyGet: Subscription;
-    public title = 'app';
     private subject = new Subject<string>();
-    protected emitter: EventEmitter<string> = new EventEmitter();
+    private emitter: EventEmitter<string> = new EventEmitter();
+
+    // Component title
+    public title = 'app';
 
     constructor(@Inject(TEST_FACTORY) private test: any,
                 private authService: AuthService,
@@ -27,9 +29,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         console.dir(this.emitter);
+
+        //
         this.subject.distinctUntilChanged().debounceTime(1000).subscribe(console.log);
+
+        // Test injector usage
         this.test.logger('Hallo wie geht es');
 
+        // Event emitter as observer ...
         this.emitter
             .map((v) => v)
             .debounceTime(1000)
