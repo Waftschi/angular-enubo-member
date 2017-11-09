@@ -22,9 +22,9 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        const action = {type: 'LOAD_USER'};
+        const action = {type: 'LOAD_USER_EFFECT'};
         this.store.dispatch(action);
-        // this.userService.getLUser$(this.authService.getAuthKey()).subscribe(user => console.dir);
+        // this.userService.getUser$(this.authService.getAuthKey()).subscribe(user => console.dir);
     }
 }
 

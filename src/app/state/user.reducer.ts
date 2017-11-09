@@ -17,7 +17,10 @@ const initialState: State = {
 export function userReducer(state = [], action: Action) {
     switch (action.type) {
         case 'LOAD_USER':
-            // console.dir(action.payload);
+            console.dir(action.payload);
+            return action.payload;
+        case 'LOAD_USER_EFFECT':
+            //console.dir(action.payload);
             return action.payload;
         default: {
             return state;
